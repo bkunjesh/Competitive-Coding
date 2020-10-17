@@ -19,15 +19,19 @@ void solve()
     ll i,j,k;
     string s;cin>>s;
     n=s.size();
+
     vector<ll> bsuf(n+2,0);
+
     for(i=n-1;i>=0;i--)
     {
         if(s[i]=='B'&&bsuf[i+1]>=0) 
         {            
             bsuf[i]=bsuf[i+1]+1;
         }
-        else if(s[i]=='B'&&bsuf[i+1]<0) bsuf[i]=1;
-        else if(s[i]=='A') bsuf[i]=bsuf[i+1]-1;
+        else if(s[i]=='B'&&bsuf[i+1]<0) 
+        bsuf[i]=1;
+        else if(s[i]=='A') 
+        bsuf[i]=bsuf[i+1]-1;
     }
     ll ans=0;
     for(i=0;i<n;i++)
@@ -37,10 +41,6 @@ void solve()
     }
     if(bsuf[0]>0&&bsuf[0]%2==1) ans++;
     cout<<ans<<endl;
-
-
-
-
 }
 
 int main()
