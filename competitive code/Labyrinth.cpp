@@ -5,88 +5,105 @@ using namespace std;
 #define fast                      \
     ios_base::sync_with_stdio(0); \
     cin.tie(0);
-#define f(i, k) for (i = 0; i < k; i++)
+#define f(i, k) for (int i = 0; i < k; i++)
 #define F first
 #define dbg(x) cout << #x << " " << x << endl;
 #define S second
 #define endl "\n"
-#define rep(i, n) for (i = 1; i <= n; i++)
-#define rew(i, a, b) for (i = a; i <= b; i++)
+#define rep(i, n) for (int i = 1; i <= n; i++)
+#define rew(i, a, b) for (int i = a; i <= b; i++)
 #define mod 1000000007
 const int inf = 1e18;
-int N = 200005;
-int n, m;
-char g[1001][1001];
-int flag = 0;
-pair<int, int> start;
-pair<int, int> dest;
-string answer;
-string solve(int i, int j, string ans)
-{
-    g[i][j] = '#';
-    //cout << i << " " << j << endl;
-    if (i == dest.F && j == dest.S)
-    {
-        flag = 1;
-        answer = ans;
-        return ans;
-    }
-    if (j + 1 < m && g[i][j + 1] == '.')
-    {
-        //ans += "R";
-        solve(i, j + 1, ans + "R");
-    }
-    if (i + 1 < n && g[i + 1][j] == '.')
-    {
-        //ans += "D";
-        solve(i + 1, j, ans + "D");
-    }
-    if (j - 1 >= 0 && g[i][j - 1] == '.')
-    {
-        //ans += "L";
-        solve(i, j - 1, ans + "L");
-    }
-    if (i - 1 >= 0 && g[i - 1][j] == '.')
-    {
-        //ans += "U";
-        solve(i - 1, j, ans + "U");
-    }
+const int N = 1005;
 
-    return ans;
+int n, m;
+vector<vector<char>> grid(1005, vector<char>(1005));
+vector<vector<bool>> visited(1005, vector<bool>(1005, 0));
+map<pair<int, int>, pair<int, int>> parent;
+pair<int, int> start, dest;
+bool isvalid(int x, int y)
+{
+    if (x < 0 || x >= n || y < 0 || y >= m || visited[x][y] || grid[x][y] == '#')
+        return 0;
+    else
+        return 1;
 }
-void sol()
+void bfs()
+{
+    queue<pair<int, int>> q;
+    q.push(start);
+    visited[start.F][start.S] = 1;
+    int X[4] = {1, -1, 0, 0};
+    int Y[4] = {0, 0, 1, -1};
+    while (!q.empty())
+    {
+        pair<int, int> curr = q.front();
+
+        q.pop();
+
+        for (int i = 0; i < 4; i++)
+        {
+            int x = X[i] + curr.F;
+            int y = Y[i] + curr.S;
+            if (isvalid(x, y))
+            {
+                q.push({x, y});
+                parent[{x, y}] = curr;
+                visited[x][y] = 1;
+            }
+        }
+    }
+}
+
+void solve()
 {
     int i, j, k;
+
     cin >> n >> m;
-    int cnt = 0;
     f(i, n)
     {
         f(j, m)
         {
-            cin >> g[i][j];
-            if (g[i][j] == 'A')
+            cin >> grid[i][j];
+            if (grid[i][j] == 'A')
             {
                 start = {i, j};
             }
-            if (g[i][j] == 'B')
+            if (grid[i][j] == 'B')
             {
                 dest = {i, j};
-                g[i][j] = '.';
             }
         }
     }
-    string ans = "";
-    ans = solve(start.F, start.S, ans);
-    if (flag)
-    {
-        cout << "YES" << endl;
-        cout << answer.size() << endl;
-        cout << answer << endl;
-    }
-    else
+
+    bfs();
+    if(visited[dest.F][dest.S]==0)
     {
         cout << "NO" << endl;
+        return;
     }
+    vector<char> ans;
+    pair<int, int> cur = dest;
+    pair<int, int> par = parent[dest];
+    while (cur != start)
+    {
+        if ((cur.F - par.F) != 0)
+        {
+            ((cur.F - par.F) == 1) ? ans.push_back('D') : ans.push_back('U');
+        }
+        else
+        {
+            (cur.S - par.S == 1) ? ans.push_back('R') : ans.push_back('L');
+        }
+        cur = par;
+        par = parent[cur];
+    }
+    cout << "YES" << endl;
+    cout << ans.size() << endl;
+    reverse(ans.begin(), ans.end());
+    for (auto it : ans)
+        cout << it;
+    cout << endl;
 
     return;
 }
@@ -97,7 +114,7 @@ signed main()
     //cin >> t;
     while (t--)
     {
-        sol();
+        solve();
     }
     return 0;
 }
