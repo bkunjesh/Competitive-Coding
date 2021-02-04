@@ -1,4 +1,4 @@
-//@CodesUp
+//@ikung
 #include <bits/stdc++.h>
 using namespace std;
 #define int long long
@@ -23,31 +23,17 @@ void solve()
     int i, j, k;
 
     cin >> n;
-    string s;
-    cin >> s;
-    //cout << s.substr(3, 3) << endl;
-    if (s == "2020")
+    vector<int> a(n + 1);
+    a[0] = 0;
+    rep(i, n) cin >> a[i];
+    vector<int> dp(n + 1, INT_MIN);
+
+    dp[0] = a[0], dp[1] = a[1];
+    for (i = 2; i <= n; i++)
     {
-        cout << "YES" << endl;
-        return;
+        dp[i] = max(dp[i - 1], dp[i - 2] + a[i]);
     }
-    for (i = 0; i < n; i++)
-    {
-        
-        for (j = i; j < n; j++)
-        {
-
-            // cout << i << " " << j << " " << s.substr(0, i) + s.substr(j + 1, n - j - 1) << endl;
-
-            if (s.substr(0, i) + s.substr(j + 1, n - j - 1) == "2020")
-            {
-                cout << "YES" << endl;
-                return;
-            }
-        }
-    }
-    cout << "NO" << endl;
-
+    cout << dp[n] << " " << INT_MAX << endl;
     return;
 }
 

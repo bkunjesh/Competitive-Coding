@@ -22,31 +22,26 @@ void solve()
 {
     int i, j, k;
 
-    cin >> n;
-    string s;
-    cin >> s;
-    //cout << s.substr(3, 3) << endl;
-    if (s == "2020")
+    int m;
+    cin >> n >> m;
+    bool row[n + 1] = {0}, col[n + 1] = {0};
+    int r = 0, c = 0;
+    while (m--)
     {
-        cout << "YES" << endl;
-        return;
-    }
-    for (i = 0; i < n; i++)
-    {
-        
-        for (j = i; j < n; j++)
+        cin >> j >> k;
+        if (row[j] == 0)
         {
-
-            // cout << i << " " << j << " " << s.substr(0, i) + s.substr(j + 1, n - j - 1) << endl;
-
-            if (s.substr(0, i) + s.substr(j + 1, n - j - 1) == "2020")
-            {
-                cout << "YES" << endl;
-                return;
-            }
+            row[j] = 1;
+            r++;
         }
+        if (col[k] == 0)
+        {
+            col[k] = 1;
+            c++;
+        }
+
+        cout << n * n - r * n - c * n + r * c << " ";
     }
-    cout << "NO" << endl;
 
     return;
 }
@@ -54,7 +49,7 @@ void solve()
 signed main()
 {
     fast int t = 1, i, j, k;
-    cin >> t;
+    //cin >> t;
     while (t--)
     {
         solve();

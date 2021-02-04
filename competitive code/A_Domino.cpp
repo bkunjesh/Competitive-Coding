@@ -1,4 +1,4 @@
-//@CodesUp
+//@ikung
 #include <bits/stdc++.h>
 using namespace std;
 #define int long long
@@ -23,30 +23,23 @@ void solve()
     int i, j, k;
 
     cin >> n;
-    string s;
-    cin >> s;
-    //cout << s.substr(3, 3) << endl;
-    if (s == "2020")
+    int upper[n], lower[n], flag = 0, usumo = 0, usume = 0, lsumo = 0, lsume = 0;
+    f(i, n) cin >> upper[i] >> lower[i], (upper[i] % 2 == 0) ? usume++ : usumo++, (lower[i] % 2 == 0) ? lsume++ : lsumo++, flag = (upper[i] % 2 != lower[i] % 2) ? 1 : flag;
+
+    if (usumo % 2 == 0 && lsumo % 2 == 0)
     {
-        cout << "YES" << endl;
+        cout << 0 << endl;
         return;
     }
-    for (i = 0; i < n; i++)
+    else if (usumo % 2 == 1 && lsumo % 2 == 1 && flag)
     {
-        
-        for (j = i; j < n; j++)
-        {
-
-            // cout << i << " " << j << " " << s.substr(0, i) + s.substr(j + 1, n - j - 1) << endl;
-
-            if (s.substr(0, i) + s.substr(j + 1, n - j - 1) == "2020")
-            {
-                cout << "YES" << endl;
-                return;
-            }
-        }
+        cout << 1 << endl;
+        return;
     }
-    cout << "NO" << endl;
+    else
+    {
+        cout << -1 << endl;
+    }
 
     return;
 }
@@ -54,7 +47,7 @@ void solve()
 signed main()
 {
     fast int t = 1, i, j, k;
-    cin >> t;
+    //cin >> t;
     while (t--)
     {
         solve();

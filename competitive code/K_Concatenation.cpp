@@ -22,32 +22,37 @@ void solve()
 {
     int i, j, k;
 
-    cin >> n;
-    string s;
-    cin >> s;
-    //cout << s.substr(3, 3) << endl;
-    if (s == "2020")
+    cin >> n >> k;
+    int a[n + 1];
+    f(i, n) cin >> a[i];
+
+
+    int mx = a[0];
+    int local_mx = a[0];
+
+    for (i = 1; i < n; i++)
     {
-        cout << "YES" << endl;
+        local_mx = max(local_mx + a[i], a[i]);
+        mx = max(mx, local_mx);
+    }
+
+    if (k == 1)
+    {
+        cout << mx << endl;
         return;
     }
-    for (i = 0; i < n; i++)
-    {
-        
-        for (j = i; j < n; j++)
-        {
+    
 
-            // cout << i << " " << j << " " << s.substr(0, i) + s.substr(j + 1, n - j - 1) << endl;
+    int prefmx=INT_MIN,cur=0, sufmx=INT_MIN;
 
-            if (s.substr(0, i) + s.substr(j + 1, n - j - 1) == "2020")
-            {
-                cout << "YES" << endl;
-                return;
-            }
-        }
-    }
-    cout << "NO" << endl;
+    for (i = 0; i < n; i++)    cur += a[i], prefmx = max(prefmx, cur);
+    cur = 0;
+    for (j = n - 1; j >= 0; j--)    cur += a[j], sufmx = max(sufmx, cur);
 
+
+    mx = max({mx,prefmx+sufmx, prefmx + sufmx + cur * (k - 2)});
+
+    cout << mx << endl;
     return;
 }
 

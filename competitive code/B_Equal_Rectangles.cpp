@@ -1,4 +1,4 @@
-//@CodesUp
+//@ikung
 #include <bits/stdc++.h>
 using namespace std;
 #define int long long
@@ -23,30 +23,26 @@ void solve()
     int i, j, k;
 
     cin >> n;
-    string s;
-    cin >> s;
-    //cout << s.substr(3, 3) << endl;
-    if (s == "2020")
+    vector<int> a(4 * n);
+    for (int j = 0; j < 4 * n; ++j)
     {
-        cout << "YES" << endl;
-        return;
+        cin >> a[j];
     }
-    for (i = 0; i < n; i++)
+    sort(a.begin(), a.end());
+    int area = a[0] * a.back();
+    bool ok = true;
+    for (i = 0; i < n; ++i)
     {
-        
-        for (j = i; j < n; j++)
+        int lf = i * 2, rg = 4 * n - (i * 2) - 1;
+        if (a[lf] != a[lf + 1] || a[rg] != a[rg - 1] || a[lf] * 1ll * a[rg] != area)
         {
-
-            // cout << i << " " << j << " " << s.substr(0, i) + s.substr(j + 1, n - j - 1) << endl;
-
-            if (s.substr(0, i) + s.substr(j + 1, n - j - 1) == "2020")
-            {
-                cout << "YES" << endl;
-                return;
-            }
+            ok = false;
         }
     }
-    cout << "NO" << endl;
+    if (ok)
+        cout << "YES" << endl;
+    else
+        cout << "NO" << endl;
 
     return;
 }

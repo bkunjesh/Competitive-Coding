@@ -20,33 +20,23 @@ int n;
 
 void solve()
 {
-    int i, j, k;
+    int i, j, k, a, b, c;
 
-    cin >> n;
-    string s;
-    cin >> s;
-    //cout << s.substr(3, 3) << endl;
-    if (s == "2020")
+    cin >> a >> b >> c;
+    int sum = a + b + c;
+    if (min({a, b, c}) < (sum / 9))
     {
-        cout << "YES" << endl;
+        cout << "NO" << endl;
         return;
     }
-    for (i = 0; i < n; i++)
+    else
     {
-        
-        for (j = i; j < n; j++)
-        {
-
-            // cout << i << " " << j << " " << s.substr(0, i) + s.substr(j + 1, n - j - 1) << endl;
-
-            if (s.substr(0, i) + s.substr(j + 1, n - j - 1) == "2020")
-            {
-                cout << "YES" << endl;
-                return;
-            }
-        }
+        if (sum % 9 == 0)
+            cout << "YES" << endl;
+        else
+            cout << "NO" << endl;
+        return;
     }
-    cout << "NO" << endl;
 
     return;
 }

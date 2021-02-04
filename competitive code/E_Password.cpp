@@ -1,4 +1,4 @@
-//@CodesUp
+//@ikung
 #include<bits/stdc++.h>
 using namespace std;
 #define int long long
@@ -12,7 +12,7 @@ using namespace std;
 #define rew(i,a,b) for(int i=a;i<=b;i++)
 #define mod 1000000007
 const int inf = 1e18;
-int N=200005;
+const int N=200005;
 
 int n;
 
@@ -21,9 +21,9 @@ void solve()
     int i, j, k;
 
     cin >> n;
-    cout << n << endl;
-    rep(i, n) cout << i << " ";
-    cout << endl;
+    string s;
+    cin >> s;
+    
 
     return;
 }
@@ -32,7 +32,7 @@ signed main()
 {
     fast
     int t = 1, i, j, k;
-    cin >> t;
+    //cin >> t;
     while (t--)
     {
         solve();		

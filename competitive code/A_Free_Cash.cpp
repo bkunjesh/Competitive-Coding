@@ -1,4 +1,4 @@
-//@CodesUp
+//@ikung
 #include <bits/stdc++.h>
 using namespace std;
 #define int long long
@@ -20,33 +20,19 @@ int n;
 
 void solve()
 {
-    int i, j, k;
+    int i, j, k, ans = 0;
 
     cin >> n;
-    string s;
-    cin >> s;
-    //cout << s.substr(3, 3) << endl;
-    if (s == "2020")
+    int s1, s2;
+    map<pair<int,int>, int> m;
+    f(i, n)
     {
-        cout << "YES" << endl;
-        return;
-    }
-    for (i = 0; i < n; i++)
-    {
+        cin >> s1 >> s2;
         
-        for (j = i; j < n; j++)
-        {
-
-            // cout << i << " " << j << " " << s.substr(0, i) + s.substr(j + 1, n - j - 1) << endl;
-
-            if (s.substr(0, i) + s.substr(j + 1, n - j - 1) == "2020")
-            {
-                cout << "YES" << endl;
-                return;
-            }
-        }
+        m[{s1,s2}]++;
+        ans = max(ans, m[{s1,s2}]);
     }
-    cout << "NO" << endl;
+    cout << ans << endl;
 
     return;
 }
@@ -54,7 +40,7 @@ void solve()
 signed main()
 {
     fast int t = 1, i, j, k;
-    cin >> t;
+    //cin >> t;
     while (t--)
     {
         solve();

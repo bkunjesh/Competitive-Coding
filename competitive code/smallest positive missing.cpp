@@ -1,7 +1,7 @@
-//@CodesUp
+//@ikung
 #include<bits/stdc++.h>
 using namespace std;
-#define int long long
+//#define int long long
 #define fast ios_base::sync_with_stdio(0);cin.tie(0);
 #define f(i,k) for(int i=0;i<k;i++)
 #define F first
@@ -12,20 +12,31 @@ using namespace std;
 #define rew(i,a,b) for(int i=a;i<=b;i++)
 #define mod 1000000007
 const int inf = 1e18;
-int N=200005;
+const int N=200005;
 
 int n;
 
 void solve()
 {
     int i, j, k;
-
     cin >> n;
-    cout << n << endl;
-    rep(i, n) cout << i << " ";
-    cout << endl;
+    int arr[n];
+    f(i, n) cin >> arr[i];
+    f(i,n)
+    {
+        if(arr[i]>0&&arr[i]<=n)
+        {
+            a[arr[i]] = 1;
+        }
+    }
+    rep(i,n+1)
+    if(!a[i])
+    {
+        cout << i << endl;
+        return;
+    }
 
-    return;
+        return;
 }
 
 signed main()

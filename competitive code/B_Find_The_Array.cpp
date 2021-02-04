@@ -1,3 +1,4 @@
+
 //@CodesUp
 #include <bits/stdc++.h>
 using namespace std;
@@ -20,33 +21,17 @@ int n;
 
 void solve()
 {
-    int i, j, k;
+    int i, j, k,osum=0,esum=0;
 
     cin >> n;
-    string s;
-    cin >> s;
-    //cout << s.substr(3, 3) << endl;
-    if (s == "2020")
-    {
-        cout << "YES" << endl;
-        return;
-    }
-    for (i = 0; i < n; i++)
-    {
-        
-        for (j = i; j < n; j++)
-        {
+    int a[n], b[n];
+    f(i, n) cin >> a[i], b[i] = a[i],(i%2==1)?osum+=a[i]:esum+=a[i];
 
-            // cout << i << " " << j << " " << s.substr(0, i) + s.substr(j + 1, n - j - 1) << endl;
+    if(osum<(osum+esum)/2) {f(i, n) if (i % 2) b[i] = 1;}
+    else {f(i, n) if (i % 2==0) b[i] = 1;}
 
-            if (s.substr(0, i) + s.substr(j + 1, n - j - 1) == "2020")
-            {
-                cout << "YES" << endl;
-                return;
-            }
-        }
-    }
-    cout << "NO" << endl;
+    f(i, n) cout << b[i] << " ";
+    cout << endl;
 
     return;
 }

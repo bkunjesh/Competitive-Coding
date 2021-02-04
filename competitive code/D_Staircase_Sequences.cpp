@@ -1,4 +1,4 @@
-//@CodesUp
+//@ikung
 #include <bits/stdc++.h>
 using namespace std;
 #define int long long
@@ -23,30 +23,21 @@ void solve()
     int i, j, k;
 
     cin >> n;
-    string s;
-    cin >> s;
-    //cout << s.substr(3, 3) << endl;
-    if (s == "2020")
+    //let say p element is in one of the total way ans
+    //(2*a+p-1)*p=2*n
+    n = 2 * n;
+    int ans = 0;
+    for (i = 1; i * i < n; i++)
     {
-        cout << "YES" << endl;
-        return;
-    }
-    for (i = 0; i < n; i++)
-    {
-        
-        for (j = i; j < n; j++)
+        if (n % i == 0)
         {
-
-            // cout << i << " " << j << " " << s.substr(0, i) + s.substr(j + 1, n - j - 1) << endl;
-
-            if (s.substr(0, i) + s.substr(j + 1, n - j - 1) == "2020")
-            {
-                cout << "YES" << endl;
-                return;
-            }
+            if (((n / i) + 1 - i) % 2 == 0 && ((n / i) + 1 - i) > 0)
+                ans++;
+            if ((i + 1 - n / i) % 2 == 0 && (i + 1 - n / i) > 0)
+                ans++;
         }
     }
-    cout << "NO" << endl;
+    cout << ans*2 << endl;
 
     return;
 }
@@ -54,7 +45,7 @@ void solve()
 signed main()
 {
     fast int t = 1, i, j, k;
-    cin >> t;
+    //cin >> t;
     while (t--)
     {
         solve();

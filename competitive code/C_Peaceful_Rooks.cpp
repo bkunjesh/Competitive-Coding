@@ -20,33 +20,27 @@ int n;
 
 void solve()
 {
-    int i, j, k;
+    int i, j, k,ans=0;
 
-    cin >> n;
-    string s;
-    cin >> s;
-    //cout << s.substr(3, 3) << endl;
-    if (s == "2020")
-    {
-        cout << "YES" << endl;
-        return;
-    }
-    for (i = 0; i < n; i++)
+    int m;
+    cin >> n >> m;
+    int x[n + 1], y[n + 1], visited[n + 1];
+    memset(visited, 0, sizeof(visited));
+
+    f(i, m) 
     {
         
-        for (j = i; j < n; j++)
-        {
-
-            // cout << i << " " << j << " " << s.substr(0, i) + s.substr(j + 1, n - j - 1) << endl;
-
-            if (s.substr(0, i) + s.substr(j + 1, n - j - 1) == "2020")
-            {
-                cout << "YES" << endl;
-                return;
-            }
-        }
     }
-    cout << "NO" << endl;
+    int rook = m;
+    rep(i,n)
+    {
+        if(x[i]>0&&y[i]>0)
+        {
+            rook--;
+            visited[i] = 1;
+        }
+        
+    }
 
     return;
 }
@@ -54,7 +48,7 @@ void solve()
 signed main()
 {
     fast int t = 1, i, j, k;
-    cin >> t;
+    //cin >> t;
     while (t--)
     {
         solve();

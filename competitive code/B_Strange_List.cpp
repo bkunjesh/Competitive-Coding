@@ -1,4 +1,4 @@
-//@CodesUp
+//@ikung
 #include <bits/stdc++.h>
 using namespace std;
 #define int long long
@@ -20,34 +20,38 @@ int n;
 
 void solve()
 {
-    int i, j, k;
+    int i, j, k=1e10,s=0;
+    int x;
 
-    cin >> n;
-    string s;
-    cin >> s;
-    //cout << s.substr(3, 3) << endl;
-    if (s == "2020")
+    cin >> n >> x;
+    int a[n], power[n];
+    memset(power, 0, sizeof(power));
+    f(i, n) cin >> a[i],s+=a[i];
+    f(i, n)
     {
-        cout << "YES" << endl;
-        return;
-    }
-    for (i = 0; i < n; i++)
-    {
-        
-        for (j = i; j < n; j++)
+        int cnt = 0;
+        int temp = a[i];
+        while (temp % x == 0)
         {
-
-            // cout << i << " " << j << " " << s.substr(0, i) + s.substr(j + 1, n - j - 1) << endl;
-
-            if (s.substr(0, i) + s.substr(j + 1, n - j - 1) == "2020")
-            {
-                cout << "YES" << endl;
-                return;
-            }
+            cnt++;
+            temp /= x;
         }
+        power[i] = cnt;
+        k = min(k, cnt);
     }
-    cout << "NO" << endl;
 
+    {
+        int sum = s+s*k, flag = 1;
+        f(i, n)
+        {
+            power[i] -= k;
+            if(power[i]>0)
+                sum += a[i];
+            else
+                break;
+        }
+        cout << sum << endl;
+    }
     return;
 }
 

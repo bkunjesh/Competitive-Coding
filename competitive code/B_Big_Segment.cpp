@@ -1,4 +1,4 @@
-//@CodesUp
+//@ikung
 #include <bits/stdc++.h>
 using namespace std;
 #define int long long
@@ -17,36 +17,33 @@ const int inf = 1e18;
 const int N = 200005;
 
 int n;
-
+bool cmp(pair<pair<int, int>, int> &a, pair<pair<int, int>, int> &b)
+{
+    if (a.F.F == b.F.F)
+    {
+        return a.F.S > b.F.S;
+    }
+    return a.F.F < b.F.F;
+}
 void solve()
 {
     int i, j, k;
 
     cin >> n;
-    string s;
-    cin >> s;
-    //cout << s.substr(3, 3) << endl;
-    if (s == "2020")
-    {
-        cout << "YES" << endl;
-        return;
-    }
+    vector<pair<pair<int, int>, int>> a;
+    f(i, n) cin >> j >> k, a.push_back({{j, k}, i});
+    sort(a.begin(), a.end(), cmp);
+    int mn = a[0].F.F;
+    int mx = a[0].F.S;
     for (i = 0; i < n; i++)
     {
-        
-        for (j = i; j < n; j++)
+        if (a[i].F.F < mn || a[i].F.S > mx)
         {
-
-            // cout << i << " " << j << " " << s.substr(0, i) + s.substr(j + 1, n - j - 1) << endl;
-
-            if (s.substr(0, i) + s.substr(j + 1, n - j - 1) == "2020")
-            {
-                cout << "YES" << endl;
-                return;
-            }
+            cout << -1 << endl;
+            return;
         }
     }
-    cout << "NO" << endl;
+    cout << a[0].S + 1 << endl;
 
     return;
 }
@@ -54,7 +51,7 @@ void solve()
 signed main()
 {
     fast int t = 1, i, j, k;
-    cin >> t;
+    //cin >> t;
     while (t--)
     {
         solve();

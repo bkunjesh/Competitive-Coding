@@ -1,4 +1,4 @@
-//@CodesUp
+//@ikung
 #include <bits/stdc++.h>
 using namespace std;
 #define int long long
@@ -23,30 +23,25 @@ void solve()
     int i, j, k;
 
     cin >> n;
-    string s;
-    cin >> s;
-    //cout << s.substr(3, 3) << endl;
-    if (s == "2020")
+    int a[n];
+    f(i, n) cin >> a[i];
+    int prefxor[n], prefodd[n], prefeve[n];
+    prefxor[0] = a[0];
+    prefodd[0] = (a[0] % 2);
+    prefeve[0] = !(a[0] % 2);
+    int ans = prefeve[0];
+    rep(i, n - 1)
     {
-        cout << "YES" << endl;
-        return;
-    }
-    for (i = 0; i < n; i++)
-    {
-        
-        for (j = i; j < n; j++)
-        {
+        prefxor[i] = prefxor[i - 1] ^ a[i];
+        prefeve[i] = prefeve[i - 1] + (!(prefxor[i] % 2));
+        prefodd[i] = prefodd[i - 1] + (prefxor[i] % 2);
 
-            // cout << i << " " << j << " " << s.substr(0, i) + s.substr(j + 1, n - j - 1) << endl;
+        ans += (prefxor[i] % 2 == 0) ? prefeve[i] : prefodd[i - 1];
 
-            if (s.substr(0, i) + s.substr(j + 1, n - j - 1) == "2020")
-            {
-                cout << "YES" << endl;
-                return;
-            }
-        }
+        // cout << i << " " << prefxor[i] << " " << prefodd[i] << " " << prefeve[i] << endl;
     }
-    cout << "NO" << endl;
+
+    cout << ans << endl;
 
     return;
 }

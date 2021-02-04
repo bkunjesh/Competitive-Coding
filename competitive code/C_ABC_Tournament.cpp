@@ -1,4 +1,4 @@
-//@CodesUp
+//@ikung
 #include <bits/stdc++.h>
 using namespace std;
 #define int long long
@@ -18,35 +18,45 @@ const int N = 200005;
 
 int n;
 
+void cmax(int &a, int &b)
+{
+    a = max(a, b);
+    //b = a;
+}
+
 void solve()
 {
     int i, j, k;
 
     cin >> n;
-    string s;
-    cin >> s;
-    //cout << s.substr(3, 3) << endl;
-    if (s == "2020")
+    int m = pow(2, n);
+    vector<int> a(m);
+    
+    f(i, m) cin >> a[i];
+    auto b = a;
+
+    for (i = 0; i < n - 1; i++)
     {
-        cout << "YES" << endl;
-        return;
-    }
-    for (i = 0; i < n; i++)
-    {
-        
-        for (j = i; j < n; j++)
+        // dbg(i);
+        int to_com_sz = pow(2, i);
+        for (j = 0; j < m;)
         {
+            cmax(a[j], a[j + to_com_sz]);
+            // cout << a[j] << " " << a[j + to_com_sz] << " " << pow(2, i + 1) << endl;
 
-            // cout << i << " " << j << " " << s.substr(0, i) + s.substr(j + 1, n - j - 1) << endl;
-
-            if (s.substr(0, i) + s.substr(j + 1, n - j - 1) == "2020")
-            {
-                cout << "YES" << endl;
-                return;
-            }
+            j += pow(2, i + 1);
         }
     }
-    cout << "NO" << endl;
+    k = min(a[0], a[pow(2, i)]);
+    // if (n == 1)
+    // {
+
+    //     cmax(a[0], a[1]);
+
+    // }
+    //cout << k << " ";
+
+    f(i, m) if (b[i] == k) cout << i + 1 << endl;
 
     return;
 }
@@ -54,10 +64,11 @@ void solve()
 signed main()
 {
     fast int t = 1, i, j, k;
-    cin >> t;
+    //cin >> t;
     while (t--)
     {
         solve();
     }
     return 0;
 }
+

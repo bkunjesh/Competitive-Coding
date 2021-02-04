@@ -23,30 +23,37 @@ void solve()
     int i, j, k;
 
     cin >> n;
-    string s;
-    cin >> s;
-    //cout << s.substr(3, 3) << endl;
-    if (s == "2020")
+    vector<int> a(n + 1);
+    f(i, n) cin >> a[i];
+
+    int pref[n + 2];
+    memset(pref, 0, sizeof(pref));
+
+    pref[0] = a[0];
+    rep(i, n - 1) pref[i] = pref[i - 1] + a[i];
+
+    int sum = pref[n - 1];
+
+    for (int len = n; len > 0; len--)
     {
-        cout << "YES" << endl;
-        return;
-    }
-    for (i = 0; i < n; i++)
-    {
-        
-        for (j = i; j < n; j++)
+        if (sum % len == 0)
         {
-
-            // cout << i << " " << j << " " << s.substr(0, i) + s.substr(j + 1, n - j - 1) << endl;
-
-            if (s.substr(0, i) + s.substr(j + 1, n - j - 1) == "2020")
+            int p = sum / len;
+            int times = len;
+            //cout << sum <<" "<<len<< endl;
+            while (times-- && binary_search(pref, pref + n, p))
             {
-                cout << "YES" << endl;
+                //cout << p << " ";
+                p += p;
+            }
+           // cout << endl;
+            if (times <= 0)
+            {
+                cout << n - len << endl;
                 return;
             }
         }
     }
-    cout << "NO" << endl;
 
     return;
 }

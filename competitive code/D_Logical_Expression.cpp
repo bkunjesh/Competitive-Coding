@@ -1,4 +1,4 @@
-//@CodesUp
+//@ikung
 #include <bits/stdc++.h>
 using namespace std;
 #define int long long
@@ -23,30 +23,24 @@ void solve()
     int i, j, k;
 
     cin >> n;
-    string s;
-    cin >> s;
-    //cout << s.substr(3, 3) << endl;
-    if (s == "2020")
+    vector<string> a(n + 1);
+    vector<vector<int>> dp(n + 1, vector<int>(2, 0));
+    dp[0][1] = 1, dp[0][0] = 1;
+    rep(i, n) cin >> a[i];
+    for (i = 1; i <= n; i++)
     {
-        cout << "YES" << endl;
-        return;
-    }
-    for (i = 0; i < n; i++)
-    {
-        
-        for (j = i; j < n; j++)
+        if (a[i] == "AND")
         {
-
-            // cout << i << " " << j << " " << s.substr(0, i) + s.substr(j + 1, n - j - 1) << endl;
-
-            if (s.substr(0, i) + s.substr(j + 1, n - j - 1) == "2020")
-            {
-                cout << "YES" << endl;
-                return;
-            }
+            dp[i][0] = dp[i - 1][0] + dp[i - 1][1] + dp[i - 1][0];
+            dp[i][1] = dp[i - 1][1];
+        }
+        else
+        {
+            dp[i][0] = dp[i - 1][0];
+            dp[i][1] = dp[i - 1][0] + dp[i - 1][1] + dp[i - 1][1];
         }
     }
-    cout << "NO" << endl;
+    cout << dp[n][1] << endl;
 
     return;
 }
@@ -54,7 +48,7 @@ void solve()
 signed main()
 {
     fast int t = 1, i, j, k;
-    cin >> t;
+    //cin >> t;
     while (t--)
     {
         solve();

@@ -22,39 +22,24 @@ void solve()
 {
     int i, j, k;
 
-    cin >> n;
     string s;
     cin >> s;
-    //cout << s.substr(3, 3) << endl;
-    if (s == "2020")
+    for (auto it : s)
     {
-        cout << "YES" << endl;
-        return;
-    }
-    for (i = 0; i < n; i++)
-    {
-        
-        for (j = i; j < n; j++)
+        if (it == 'H' || it == 'Q' || it == '9')
         {
-
-            // cout << i << " " << j << " " << s.substr(0, i) + s.substr(j + 1, n - j - 1) << endl;
-
-            if (s.substr(0, i) + s.substr(j + 1, n - j - 1) == "2020")
-            {
-                cout << "YES" << endl;
-                return;
-            }
+            cout << "YES" << endl;
+            return;
         }
     }
     cout << "NO" << endl;
-
     return;
 }
 
 signed main()
 {
     fast int t = 1, i, j, k;
-    cin >> t;
+    //cin >> t;
     while (t--)
     {
         solve();

@@ -1,4 +1,4 @@
-//@CodesUp
+//@ikung
 #include<bits/stdc++.h>
 using namespace std;
 #define int long long
@@ -12,18 +12,32 @@ using namespace std;
 #define rew(i,a,b) for(int i=a;i<=b;i++)
 #define mod 1000000007
 const int inf = 1e18;
-int N=200005;
+const int N=200005;
 
 int n;
 
 void solve()
 {
     int i, j, k;
+    
+    cin>>n;
+    vector<int> l,r;
+    char ch;
 
-    cin >> n;
-    cout << n << endl;
-    rep(i, n) cout << i << " ";
-    cout << endl;
+    f(i, n) cin >> ch >> j, (ch == 'L') ? l.push_back(j) : r.push_back(j);
+    sort(r.begin(), r.end(), greater<int>());
+    sort(l.begin(), l.end());
+    int L, R;
+
+    L = r[0], R = l[0];
+
+    if (l.size() == 0 || r.size() == 0 || R - L <= 1)
+    {
+        cout << -1 << endl;
+        return;
+    }
+    cout << R - L - 1 << endl;
+
 
     return;
 }

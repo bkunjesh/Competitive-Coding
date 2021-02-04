@@ -20,41 +20,38 @@ int n;
 
 void solve()
 {
-    int i, j, k;
+    int i, j, k, sum = 0;
 
     cin >> n;
-    string s;
-    cin >> s;
-    //cout << s.substr(3, 3) << endl;
-    if (s == "2020")
+    vector<pair<int, int>> a;
+    vector<int> ans;
+    rep(i, n) cin >> j, sum += j, a.push_back({j, i});
+    sort(a.begin(), a.end());
+    for (i = 0; i < n - 1; i++)
     {
-        cout << "YES" << endl;
-        return;
-    }
-    for (i = 0; i < n; i++)
-    {
-        
-        for (j = i; j < n; j++)
+        int temp_sum = sum - a[i].F;
+        if (temp_sum == 2 * a[n - 1].F)
         {
-
-            // cout << i << " " << j << " " << s.substr(0, i) + s.substr(j + 1, n - j - 1) << endl;
-
-            if (s.substr(0, i) + s.substr(j + 1, n - j - 1) == "2020")
-            {
-                cout << "YES" << endl;
-                return;
-            }
+            ans.push_back(a[i].S);
         }
     }
-    cout << "NO" << endl;
+    int temp_sum = sum - a[n - 1].F;
+    if (temp_sum == 2 * a[n - 2].F)
+    {
+        ans.push_back(a[n - 1].S);
+    }
 
+    cout << ans.size() << endl;
+    for (auto it : ans)
+        cout << it << " ";
+    cout << endl;
     return;
 }
 
 signed main()
 {
     fast int t = 1, i, j, k;
-    cin >> t;
+    //cin >> t;
     while (t--)
     {
         solve();

@@ -1,4 +1,4 @@
-//@CodesUp
+//@ikung
 #include <bits/stdc++.h>
 using namespace std;
 #define int long long
@@ -17,36 +17,34 @@ const int inf = 1e18;
 const int N = 200005;
 
 int n;
-
+vector<int> prime;
+void make_prime_vect()
+{
+    int MAXN = 4000000;
+    vector<int> br(MAXN + 1, 0);
+    for (int i = 2; i <= MAXN; i++)
+    {
+        if (br[i] == 0)
+        {
+            for (int j = i * 2; j <= MAXN; j = j + i)
+            {
+                br[j] = 1;
+            }
+        }
+    }
+    for (int i = 2; i <= MAXN; i++)
+        if (br[i] == 0)
+            prime.push_back(i);
+}
 void solve()
 {
     int i, j, k;
 
-    cin >> n;
-    string s;
-    cin >> s;
-    //cout << s.substr(3, 3) << endl;
-    if (s == "2020")
-    {
-        cout << "YES" << endl;
-        return;
-    }
-    for (i = 0; i < n; i++)
-    {
-        
-        for (j = i; j < n; j++)
-        {
-
-            // cout << i << " " << j << " " << s.substr(0, i) + s.substr(j + 1, n - j - 1) << endl;
-
-            if (s.substr(0, i) + s.substr(j + 1, n - j - 1) == "2020")
-            {
-                cout << "YES" << endl;
-                return;
-            }
-        }
-    }
-    cout << "NO" << endl;
+    int d;
+    cin >> d;
+    int a = *lower_bound(prime.begin(), prime.end(), 1 + d);
+    int b = *lower_bound(prime.begin(), prime.end(), a + d);
+    cout << a * b << endl;
 
     return;
 }
@@ -54,6 +52,7 @@ void solve()
 signed main()
 {
     fast int t = 1, i, j, k;
+    make_prime_vect();
     cin >> t;
     while (t--)
     {

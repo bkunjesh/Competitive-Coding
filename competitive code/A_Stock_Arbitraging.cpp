@@ -1,4 +1,4 @@
-//@CodesUp
+//@ikung
 #include <bits/stdc++.h>
 using namespace std;
 #define int long long
@@ -21,32 +21,27 @@ int n;
 void solve()
 {
     int i, j, k;
+    int m, r;
+    cin >> n >> m >> r;
+    vector<int> a(n), b(m);
+    f(i, n) cin >> a[i];
+    f(i, m) cin >> b[i];
+    sort(a.begin(), a.end());
+    sort(b.begin(), b.end(), greater<int>());
 
-    cin >> n;
-    string s;
-    cin >> s;
-    //cout << s.substr(3, 3) << endl;
-    if (s == "2020")
+    int mn = a[0];
+    int sell = b[0];
+
+    if (sell <= mn)
     {
-        cout << "YES" << endl;
+        cout << r << endl;
         return;
     }
-    for (i = 0; i < n; i++)
-    {
-        
-        for (j = i; j < n; j++)
-        {
+    int stock = r / a[0];
+    int bur = r % a[0];
+    bur += (stock * sell);
 
-            // cout << i << " " << j << " " << s.substr(0, i) + s.substr(j + 1, n - j - 1) << endl;
-
-            if (s.substr(0, i) + s.substr(j + 1, n - j - 1) == "2020")
-            {
-                cout << "YES" << endl;
-                return;
-            }
-        }
-    }
-    cout << "NO" << endl;
+    cout << bur << endl;
 
     return;
 }
@@ -54,7 +49,7 @@ void solve()
 signed main()
 {
     fast int t = 1, i, j, k;
-    cin >> t;
+    //cin >> t;
     while (t--)
     {
         solve();

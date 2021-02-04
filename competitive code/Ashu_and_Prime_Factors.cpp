@@ -1,4 +1,4 @@
-//@CodesUp
+//@ikung
 #include <bits/stdc++.h>
 using namespace std;
 #define int long long
@@ -17,36 +17,34 @@ const int inf = 1e18;
 const int N = 200005;
 
 int n;
+vector<int> prime;
+int MAXN = 1e6;
+vector<int> br(MAXN + 1, 0);
+void make_prime_vect()
+{
 
+    for (int i = 2; i <= MAXN; i++)
+    {
+        if (br[i] == 0)
+        {
+            br[i]++;
+            for (int j = i * 2; j <= MAXN; j = j + i)
+            {
+                if(br[j]==0) br[i]++;
+                br[j] = 1;
+            }
+        }
+    }
+    // for (int i = 2; i <= MAXN;i++)
+    // if(br[i]==0)
+    //     prime.push_back(i);
+}
 void solve()
 {
     int i, j, k;
 
     cin >> n;
-    string s;
-    cin >> s;
-    //cout << s.substr(3, 3) << endl;
-    if (s == "2020")
-    {
-        cout << "YES" << endl;
-        return;
-    }
-    for (i = 0; i < n; i++)
-    {
-        
-        for (j = i; j < n; j++)
-        {
-
-            // cout << i << " " << j << " " << s.substr(0, i) + s.substr(j + 1, n - j - 1) << endl;
-
-            if (s.substr(0, i) + s.substr(j + 1, n - j - 1) == "2020")
-            {
-                cout << "YES" << endl;
-                return;
-            }
-        }
-    }
-    cout << "NO" << endl;
+    cout << br[n] << endl;
 
     return;
 }
@@ -55,6 +53,7 @@ signed main()
 {
     fast int t = 1, i, j, k;
     cin >> t;
+    make_prime_vect();
     while (t--)
     {
         solve();

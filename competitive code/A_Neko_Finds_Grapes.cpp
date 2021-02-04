@@ -1,4 +1,4 @@
-//@CodesUp
+//@ikung
 #include <bits/stdc++.h>
 using namespace std;
 #define int long long
@@ -21,32 +21,22 @@ int n;
 void solve()
 {
     int i, j, k;
+    int m;
+    cin >> n >> m;
+    int co = 0, ce = 0, ko = 0, ke = 0;
+    f(i, n) cin >> j, (j % 2) ? co++ : ce++;
+    f(i, m) cin >> j, (j % 2) ? ko++ : ke++;
+    int ans = 0;
+    if (co < ke)
+        ans += co;
+    else
+        ans += ke;
+    if (ce < ko)
+        ans += ce;
+    else
+        ans += ko;
 
-    cin >> n;
-    string s;
-    cin >> s;
-    //cout << s.substr(3, 3) << endl;
-    if (s == "2020")
-    {
-        cout << "YES" << endl;
-        return;
-    }
-    for (i = 0; i < n; i++)
-    {
-        
-        for (j = i; j < n; j++)
-        {
-
-            // cout << i << " " << j << " " << s.substr(0, i) + s.substr(j + 1, n - j - 1) << endl;
-
-            if (s.substr(0, i) + s.substr(j + 1, n - j - 1) == "2020")
-            {
-                cout << "YES" << endl;
-                return;
-            }
-        }
-    }
-    cout << "NO" << endl;
+    cout << ans << endl;
 
     return;
 }
@@ -54,7 +44,7 @@ void solve()
 signed main()
 {
     fast int t = 1, i, j, k;
-    cin >> t;
+    //cin >> t;
     while (t--)
     {
         solve();

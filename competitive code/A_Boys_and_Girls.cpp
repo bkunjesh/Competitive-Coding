@@ -1,4 +1,4 @@
-//@CodesUp
+//@ikung
 #include<bits/stdc++.h>
 using namespace std;
 #define int long long
@@ -12,18 +12,41 @@ using namespace std;
 #define rew(i,a,b) for(int i=a;i<=b;i++)
 #define mod 1000000007
 const int inf = 1e18;
-int N=200005;
+const int N=200005;
 
 int n;
 
 void solve()
 {
-    int i, j, k;
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
 
-    cin >> n;
-    cout << n << endl;
-    rep(i, n) cout << i << " ";
-    cout << endl;
+    int i, j, k;
+    
+    int m;
+    cin >> n >> m;
+    string s;
+    if(n>m)
+        s = "BG";
+    else
+        s = "GB";
+
+    string ans = "";
+    for (i = 0; i < min(n, m);i++)
+        ans += s;
+    if(n>=m)
+    {
+        n -= m;
+        for (i = 0; i < n;i++)
+            ans += "B";
+    }
+    else
+    {
+        m -= n;
+        for (i = 0; i < m; i++)
+            ans += "G";
+    }
+    cout << ans << endl;
 
     return;
 }
@@ -32,7 +55,7 @@ signed main()
 {
     fast
     int t = 1, i, j, k;
-    cin >> t;
+    //cin >> t;
     while (t--)
     {
         solve();		

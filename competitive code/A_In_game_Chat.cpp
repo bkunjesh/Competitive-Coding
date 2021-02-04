@@ -25,28 +25,18 @@ void solve()
     cin >> n;
     string s;
     cin >> s;
-    //cout << s.substr(3, 3) << endl;
-    if (s == "2020")
-    {
-        cout << "YES" << endl;
-        return;
-    }
-    for (i = 0; i < n; i++)
-    {
-        
-        for (j = i; j < n; j++)
-        {
+    i = n - 1;
+    while (i >= 0 && s[i] == ')')
+        i--;
 
-            // cout << i << " " << j << " " << s.substr(0, i) + s.substr(j + 1, n - j - 1) << endl;
-
-            if (s.substr(0, i) + s.substr(j + 1, n - j - 1) == "2020")
-            {
-                cout << "YES" << endl;
-                return;
-            }
-        }
+    if (i < (n - 1) / 2)
+    {
+        cout << "Yes" << endl;
     }
-    cout << "NO" << endl;
+    else
+    {
+        cout << "No" << endl;
+    }
 
     return;
 }

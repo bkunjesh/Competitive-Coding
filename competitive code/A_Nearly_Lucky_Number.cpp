@@ -17,36 +17,34 @@ const int inf = 1e18;
 const int N = 200005;
 
 int n;
+bool lucky(string s)
+{
+    //cout << s << endl;
+    for (auto it : s)
+        if (it != '4' && it != '7')
+            return false;
 
+    return true;
+}
 void solve()
 {
     int i, j, k;
 
-    cin >> n;
     string s;
     cin >> s;
-    //cout << s.substr(3, 3) << endl;
-    if (s == "2020")
+    map<int, int> m;
+    for (auto it : s)
+        m[it - '0']++;
+
+    int sum = m[4] + m[7];
+    if (lucky(to_string(sum)))
     {
         cout << "YES" << endl;
-        return;
     }
-    for (i = 0; i < n; i++)
+    else
     {
-        
-        for (j = i; j < n; j++)
-        {
-
-            // cout << i << " " << j << " " << s.substr(0, i) + s.substr(j + 1, n - j - 1) << endl;
-
-            if (s.substr(0, i) + s.substr(j + 1, n - j - 1) == "2020")
-            {
-                cout << "YES" << endl;
-                return;
-            }
-        }
+        cout << "NO" << endl;
     }
-    cout << "NO" << endl;
 
     return;
 }
@@ -54,7 +52,7 @@ void solve()
 signed main()
 {
     fast int t = 1, i, j, k;
-    cin >> t;
+    //cin >> t;
     while (t--)
     {
         solve();

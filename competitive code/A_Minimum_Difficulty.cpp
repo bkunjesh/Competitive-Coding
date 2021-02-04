@@ -1,4 +1,4 @@
-//@CodesUp
+//@ikung
 #include<bits/stdc++.h>
 using namespace std;
 #define int long long
@@ -12,7 +12,7 @@ using namespace std;
 #define rew(i,a,b) for(int i=a;i<=b;i++)
 #define mod 1000000007
 const int inf = 1e18;
-int N=200005;
+const int N=200005;
 
 int n;
 
@@ -21,9 +21,22 @@ void solve()
     int i, j, k;
 
     cin >> n;
-    cout << n << endl;
-    rep(i, n) cout << i << " ";
-    cout << endl;
+    vector<int> a(n),prefmax(n),sufmax(n);
+    f(i, n) cin >> a[i];
+    int ans=inf;
+    prefmax[0] = -inf;
+    prefmax[1] = a[1]-a[0];
+    rew(i, 2, n-1) prefmax[i] = max(prefmax[i - 1], a[i] - a[i - 1]);
+    sufmax[n - 1] = -inf;
+    sufmax[n - 2] = a[n - 1] - a[n - 2];
+    for (i = n - 3; i >= 0;i--)
+        sufmax[i] = max(sufmax[i + 1], a[i + 1] - a[i]);
+    rep(i, n - 2)
+    {
+        ans = min(ans,max({prefmax[i-1],sufmax[i+1],a[i + 1] - a[i - 1]}));
+    }
+    cout << ans << endl;
+
 
     return;
 }
@@ -32,7 +45,7 @@ signed main()
 {
     fast
     int t = 1, i, j, k;
-    cin >> t;
+    //cin >> t;
     while (t--)
     {
         solve();		

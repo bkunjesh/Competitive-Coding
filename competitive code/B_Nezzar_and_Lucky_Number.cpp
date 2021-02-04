@@ -1,4 +1,4 @@
-//@CodesUp
+//@ikung
 #include <bits/stdc++.h>
 using namespace std;
 #define int long long
@@ -20,33 +20,37 @@ int n;
 
 void solve()
 {
-    int i, j, k;
+    int i, j, k, d;
 
-    cin >> n;
-    string s;
-    cin >> s;
-    //cout << s.substr(3, 3) << endl;
-    if (s == "2020")
+    cin >> n >> d;
+    vector<int> a(n);
+    f(i, n) cin >> a[i];
+    int rem[d + 1];
+    f(i, d + 1) rem[i] = inf;
+    k = d;
+    while (k <= 10 * d)
     {
-        cout << "YES" << endl;
-        return;
+        rem[(k) % d] = min(rem[(k) % d], k);
+        k += 10;
     }
+    // f(i, d) cout << rem[i] << " ";
+
     for (i = 0; i < n; i++)
     {
-        
-        for (j = i; j < n; j++)
+        if (a[i] >= 10 * d || a[i] % d == 0)
         {
-
-            // cout << i << " " << j << " " << s.substr(0, i) + s.substr(j + 1, n - j - 1) << endl;
-
-            if (s.substr(0, i) + s.substr(j + 1, n - j - 1) == "2020")
-            {
-                cout << "YES" << endl;
-                return;
-            }
+            cout << "YES" << endl;
+            continue;
+        }
+        if (rem[(a[i]) % d] != inf && rem[a[i] % d] <= a[i])
+        {
+            cout << "YES" << endl;
+        }
+        else
+        {
+            cout << "NO" << endl;
         }
     }
-    cout << "NO" << endl;
 
     return;
 }

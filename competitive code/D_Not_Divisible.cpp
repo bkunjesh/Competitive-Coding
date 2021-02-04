@@ -1,4 +1,4 @@
-//@CodesUp
+//@ikung
 #include <bits/stdc++.h>
 using namespace std;
 #define int long long
@@ -14,39 +14,41 @@ using namespace std;
 #define rew(i, a, b) for (int i = a; i <= b; i++)
 #define mod 1000000007
 const int inf = 1e18;
-const int N = 200005;
+const int N = 2000005;
 
 int n;
-
+vector<int> br(N);
 void solve()
 {
-    int i, j, k;
+    int i, j, k, ans = 0;
 
     cin >> n;
-    string s;
-    cin >> s;
-    //cout << s.substr(3, 3) << endl;
-    if (s == "2020")
+    vector<int> a(n);
+    f(i, n) cin >> a[i];
+
+    sort(a.begin(), a.end());
+
+    f(i, n)
     {
-        cout << "YES" << endl;
-        return;
-    }
-    for (i = 0; i < n; i++)
-    {
-        
-        for (j = i; j < n; j++)
+        if (br[a[i]]==0&&i < n - 1)
         {
-
-            // cout << i << " " << j << " " << s.substr(0, i) + s.substr(j + 1, n - j - 1) << endl;
-
-            if (s.substr(0, i) + s.substr(j + 1, n - j - 1) == "2020")
+            br[a[i]] = (a[i] == a[i + 1]) ? 1 : 0;
+            if(br[a[i]])
             {
-                cout << "YES" << endl;
-                return;
+                for (j = a[i] * 2; j <= 1e6; j = j + a[i])
+                    br[j] = 1;
             }
         }
+        if (br[a[i]] == 0)
+        {
+            ans++;
+            for (j = a[i] * 2; j <= 1e6; j = j + a[i])
+                br[j] = 1;
+        }
+        
     }
-    cout << "NO" << endl;
+
+    cout << ans << endl;
 
     return;
 }
@@ -54,7 +56,7 @@ void solve()
 signed main()
 {
     fast int t = 1, i, j, k;
-    cin >> t;
+    //cin >> t;
     while (t--)
     {
         solve();
