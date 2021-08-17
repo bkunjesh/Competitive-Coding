@@ -16,31 +16,53 @@ using namespace std;
 const int inf = 1e18;
 const int N = 200005;
 
-int n;
+int n, cycle;
+vector<int> g[N], visited(N),recst(N);
+
+void dfs(int node, int parent = -1)
+{
+
+    visited[node] = 1,recst[node]=1;
+
+    for (auto child : g[node])
+    {
+        if (!visited[child])
+        {
+            dfs(child, node);
+        }
+        else if(recst[child])
+        {
+            // cout << node << " " << child << endl;
+            cycle++;
+        }
+    }
+    recst[node] = 0;
+}
 
 void solve()
 {
-    int i, j, k,ans=0;
-
+    int i, j, k, ans = 0;
+    fill(visited.begin(), visited.end(), 0);
+    fill(recst.begin(), recst.end(), 0);
+    cycle = 0;
     int m;
     cin >> n >> m;
-    int x[n + 1], y[n + 1], visited[n + 1];
-    memset(visited, 0, sizeof(visited));
-
-    f(i, m) 
+    rep(i, n) g[i].clear();
+    f(i, m)
     {
-        
+        cin >> j >> k;
+        if (j != k)
+            g[j].push_back(k), ans++;
     }
-    int rook = m;
-    rep(i,n)
+    rep(i, n)
     {
-        if(x[i]>0&&y[i]>0)
+        if (!visited[i]&&g[i].size()>0)
         {
-            rook--;
-            visited[i] = 1;
+            dfs(i, -1);
         }
-        
     }
+    // cout << cycle << " ";
+    cout << ans + cycle << endl;
 
     return;
 }
@@ -48,7 +70,7 @@ void solve()
 signed main()
 {
     fast int t = 1, i, j, k;
-    //cin >> t;
+    cin >> t;
     while (t--)
     {
         solve();

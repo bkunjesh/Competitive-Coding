@@ -20,40 +20,65 @@ int n;
 
 void solve()
 {
-    int i, j, k;
+    int i, j, k,sum=0;
 
     cin >> n;
-    vector<int> a(n + 1);
-    f(i, n) cin >> a[i];
+    vector<int> a(n + 1),pref;
+    f(i, n) cin >> a[i],sum+=a[i],pref.push_back(sum);
 
-    int pref[n + 2];
-    memset(pref, 0, sizeof(pref));
-
-    pref[0] = a[0];
-    rep(i, n - 1) pref[i] = pref[i - 1] + a[i];
-
-    int sum = pref[n - 1];
-
-    for (int len = n; len > 0; len--)
+    for(i=n;i>=1;i--)
     {
-        if (sum % len == 0)
+        int flag=1;
+        if(sum%i==0)
         {
-            int p = sum / len;
-            int times = len;
-            //cout << sum <<" "<<len<< endl;
-            while (times-- && binary_search(pref, pref + n, p))
+            k=sum/i;
+            rep(j,i)
             {
-                //cout << p << " ";
-                p += p;
+                if(!binary_search(pref.begin(),pref.end(),k*j))
+                {
+                    flag=0;
+                    break;
+                }
             }
-           // cout << endl;
-            if (times <= 0)
+            if(flag)
             {
-                cout << n - len << endl;
+                cout<<n-i<<endl;
                 return;
             }
         }
     }
+
+    
+
+
+    // int pref[n + 2];
+    // memset(pref, 0, sizeof(pref));
+
+    // pref[0] = a[0];
+    // rep(i, n - 1) pref[i] = pref[i - 1] + a[i];
+
+    // int sum = pref[n - 1];
+
+    // for (int len = n; len > 0; len--)
+    // {
+    //     if (sum % len == 0)
+    //     {
+    //         int p = sum / len;
+    //         int times = len;
+    //         //cout << sum <<" "<<len<< endl;
+    //         while (times-- && binary_search(pref, pref + n, p))
+    //         {
+    //             //cout << p << " ";
+    //             p += p;
+    //         }
+    //        // cout << endl;
+    //         if (times <= 0)
+    //         {
+    //             cout << n - len << endl;
+    //             return;
+    //         }
+    //     }
+    // }
 
     return;
 }

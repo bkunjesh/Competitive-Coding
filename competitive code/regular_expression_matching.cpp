@@ -17,7 +17,12 @@ const int inf = 1e18;
 const int N = 200005;
 
 int n;
-bool REM(string pat, string s)
+// eg:
+// xaabyc
+// xa *b.c
+
+    bool
+    REM(string pat, string s)
 {
     int i, j;
     int n = s.size(), m = pat.size();
