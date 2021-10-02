@@ -6,7 +6,7 @@ class Solution
 public:
     vector<int> solve(vector<int> &t, vector<int> &dir)
     {
-        queue<pair<int, int>> exit, entry; // pair <time[index], index>
+        queue<pair<int, int>> exit, entry; 
         int N = t.size();
         vector<int> res(N);
 
@@ -18,9 +18,7 @@ public:
                 entry.push({t[i], i});
         }
 
-        int ct = 0, lc = -1; // ct is the current time & lc indicates who used
-                             // turnstile in the previous second lc = -1 if none
-                             // used the turnstile in the last second
+        int ct = 0, lc = -1; 
 
         while (!exit.empty() || !entry.empty())
         {
