@@ -55,12 +55,10 @@ struct segtree
     template <typename T>
     void build(T a, int32_t v, int32_t l, int32_t r)
     {
-
         tl[v] = l;
         tr[v] = r;
         if (l == r)
         {
-            // dbg(l, r);
             t[v] = a[l];
             return;
         }
@@ -194,7 +192,6 @@ struct segtree
 
 #define node node1
 #define update update1
-
 struct node
 {
     int v = 0;
@@ -232,25 +229,23 @@ segtree<node, update> s;
 #undef node
 #undef update
 
-int n;
-
 void solve()
 {
     int i, j, k;
 
     // segtree<node, update> s(1000); // create a segment tree of length 1000
-    vector<int> v(maxn+1);
+    // vector<int> v(17, 0);
 
     // segtree<my_node2, my_update2> s2(34543);
 
-    v[10] = 35;
-    v[13] = 3;
+    // v[10] = 35;
+    // v[13] = 3;
 
-    s.build(v);
-    // s.rupd(5, 5, 8);
+    // s.build(v);
+    s.rupd(5, 5, 8);
 
-    // s.rupd(3, 3, 14);
-    // s.rupd(2, 2, 2);
+    s.rupd(3, 3, 14);
+    s.rupd(2, 2, 2);
 
     for (int i = 0; i < 15; i++)
     {
